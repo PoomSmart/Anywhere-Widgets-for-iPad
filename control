@@ -1,0 +1,11 @@
+Package: com.ps.anywherewidgetsforipad
+Name: Anywhere Widgets for iPad
+Version: 1.0
+Architecture: iphoneos-arm
+Description: Allow widgets to be on home screen on iPad.
+Maintainer: PoomSmart
+Author: PoomSmart
+Section: Tweaks
+Depends: mobilesubstrate (>= 0.9.5000), gsc.ipad, firmware (>= 14.0)
+Depiction: https://poomsmart.github.io/repo/depictions/anywherewidgetsforipad.html
+SileoDepiction: https://poomsmart.github.io/repo/sileodepictions/anywherewidgetsforipad.json
