@@ -6,6 +6,6 @@ Description: Allow widgets to be on home screen on iPad.
 Maintainer: PoomSmart
 Author: PoomSmart
 Section: Tweaks
-Depends: mobilesubstrate (>= 0.9.5000), gsc.ipad, firmware (>= 14.0)
+Depends: mobilesubstrate (>= 0.9.5000), gsc.ipad, firmware (>= 14.0), me.nepeta.iconstate
 Depiction: https://poomsmart.github.io/repo/depictions/anywherewidgetsforipad.html
 SileoDepiction: https://poomsmart.github.io/repo/sileodepictions/anywherewidgetsforipad.json
