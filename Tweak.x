@@ -2,6 +2,21 @@
 #import <Foundation/Foundation.h>
 #import <SpringBoard/SBIcon.h>
 
+typedef struct SBHIconGridSize {
+	uint16_t columns;
+	uint16_t rows;
+} SBHIconGridSize;
+
+@interface SBIconListGridlLayoutConfiguration : NSObject
+@property NSUInteger numberOfLandscapeRows;
+@property NSUInteger numberOfLandscapeColumns;
+@property NSUInteger numberOfPortraitRows;
+@property NSUInteger numberOfPortraitColumns;
+@end
+
+@interface SBIconListGridLayout : NSObject
+@end
+
 @interface SBIcon (Additions)
 - (BOOL)isWidgetIcon;
 @end
@@ -28,16 +43,27 @@
 
 %end
 
-%hook SBIconListGridLayout
+%hook SBHDefaultIconListLayoutProvider
 
-- (NSUInteger)numberOfColumnsForOrientation:(NSInteger)orientation {
-	NSUInteger columns = %orig;
-	return columns == 6 || columns == 5 ? columns + 2 : columns;
-}
-
-- (NSUInteger)numberOfRowsForOrientation:(NSInteger)orientation {
-	NSUInteger rows = %orig;
-	return rows == 5 || rows == 4 ? rows + 1 : rows;
+- (SBIconListGridLayout *)makeLayoutForIconLocation:(NSString *)iconLocation {
+	SBIconListGridLayout *layout = %orig;
+	if ([iconLocation hasPrefix:@"SBIconLocationRoot"]) {
+		SBIconListGridlLayoutConfiguration *config = [layout valueForKey:@"_layoutConfiguration"];
+		config.numberOfLandscapeRows += 1;
+		config.numberOfLandscapeColumns += 2;
+		config.numberOfPortraitRows += 1;
+		config.numberOfPortraitColumns += 2;
+	}
+	return layout;
 }
 
 %end
+
+// %hook SBIconListView
+
+// - (SBHIconGridSize)iconGridSizeForClass:(int)iconGridSizeClass {
+// 	SBHIconGridSize size = %orig;
+// 	return size;
+// }
+
+// %end
