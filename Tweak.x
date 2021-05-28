@@ -32,15 +32,12 @@
 - (SBIconListGridLayout *)makeLayoutForIconLocation:(NSString *)iconLocation {
 	SBIconListGridLayout *layout = %orig;
 	if ([iconLocation hasPrefix:@"SBIconLocationRoot"]) {
-		// Landscape: 6x5 -> 8x6
-		// Landscape zoomed: 5x4 -> 7x5
-		// Portrait: 6x5 -> 8x7
-		// Portrait zoomed: 5x4 -> 7x6
-		// Recommendation: Don't put icons per page more than 8x6 = 48 icons
+		// Standard: 6x5 -> 8x6
+		// Zoomed: 5x4 -> 7x5
 		SBIconListGridLayoutConfiguration *config = [layout valueForKey:@"_layoutConfiguration"];
 		config.numberOfLandscapeRows += 1;
 		config.numberOfLandscapeColumns += 2;
-		config.numberOfPortraitRows += 2;
+		config.numberOfPortraitRows += 1;
 		config.numberOfPortraitColumns += 2;
 	}
 	return layout;
