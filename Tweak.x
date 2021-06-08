@@ -1,9 +1,6 @@
 #import <SpringBoard/SBIcon.h>
 #import <SpringBoard/SBIconView.h>
-#import <SpringBoardHome/SBIconListGridLayout.h>
-#import <SpringBoardHome/SBIconListGridLayoutConfiguration.h>
 #import <SpringBoardHome/SBHIconGridSize.h>
-#import <SpringBoardHome/SBHIconGridSizeClass.h>
 
 %hook SBHDefaultIconListLayoutProvider
 
@@ -23,24 +20,6 @@
 
 - (bool)rootFolder:(id)rootFolder canAddIcon:(SBIcon *)icon toIconList:(id)iconList inFolder:(id)folder {
 	return true;
-}
-
-%end
-
-%hook SBHDefaultIconListLayoutProvider
-
-- (SBIconListGridLayout *)makeLayoutForIconLocation:(NSString *)iconLocation {
-	SBIconListGridLayout *layout = %orig;
-	if ([iconLocation hasPrefix:@"SBIconLocationRoot"]) {
-		// Standard: 6x5 -> 8x6
-		// Zoomed: 5x4 -> 7x5
-		SBIconListGridLayoutConfiguration *config = [layout valueForKey:@"_layoutConfiguration"];
-		config.numberOfLandscapeRows += 1;
-		config.numberOfLandscapeColumns += 2;
-		config.numberOfPortraitRows += 1;
-		config.numberOfPortraitColumns += 2;
-	}
-	return layout;
 }
 
 %end

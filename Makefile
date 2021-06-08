@@ -1,13 +1,12 @@
-PACKAGE_VERSION = 1.3.0
+PACKAGE_VERSION = 1.4.0
 
 TARGET := iphone:clang:latest:14.0
-ARCHS = arm64 arm64e
 
 include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = AnywhereWidgetsforiPad
 
-AnywhereWidgetsforiPad_FILES = Tweak.x
-AnywhereWidgetsforiPad_CFLAGS = -fobjc-arc
+$(TWEAK_NAME)_FILES = Tweak.x
+$(TWEAK_NAME)_CFLAGS = -fobjc-arc
 
 include $(THEOS_MAKE_PATH)/tweak.mk
